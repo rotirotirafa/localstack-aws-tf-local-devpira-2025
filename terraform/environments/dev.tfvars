@@ -1,0 +1,11 @@
+# Valores para o ambiente de 'desenvolvimento' (AWS real)
+env                  = "dev"
+aws_region           = "us-east-1"
+s3_bucket_name       = "bucket-pedidos-devpira"
+sqs_queue_name       = "fila-pedidos-devpira"
+sqs_dlq_name         = "fila-pedidos-falhados-devpira"
+dynamo_table_name    = "pedidos-processados"
+lambda_function_name = "processador-de-pedidos"
+lambda_source_dir    = "../lambda_src/processar_pedido/"
+lambda_handler       = "main.lambda_handler"
+lambda_runtime       = "python3.10"
