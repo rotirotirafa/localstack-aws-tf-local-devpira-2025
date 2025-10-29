@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  localstack:
+    container_name: localstack_devpira
+    image: localstack/localstack:3
+    environment:
+      # Define os serviços que queremos iniciar. Essencial para a nossa demo.
+      - SERVICES=s3,sqs,lambda,dynamodb,iam
+      - GATEWAY_LISTEN=:4566
+      # Credenciais e região "dummy"
+      - AWS_DEFAULT_REGION=us-east-1
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      # Configuração para o executor do Lambda.
+      # Isso diz ao Localstack para rodar o código do Lambda dentro de um container Docker.
+      - LAMBDA_EXECUTOR=docker
+    ports:
+      # Expõe a porta gateway do Localstack (4566)
+      - "4566:4566"
+    volumes:
+      # Isso permite que o Localstack "crie" outros containers (as Lambdas) na sua máquina.
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      # volume para persistir os dados.
+      - "localstack_data:/var/lib/localstack"
+volumes:
+  localstack_data: {}
