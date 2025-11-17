@@ -75,30 +75,28 @@ resource "aws_sqs_queue_policy" "permitir_s3" {
 
 # O 'archive_file' não é um recurso 'aws_', ele é local.
 # Por isso, ele NÃO precisa do meta-argumento 'provider'.
+# --- 4. Função de Processamento (Lambda) ---
+
+# Primeiro, precisamos compactar o código-fonte da nossa Lambda.
 data "archive_file" "zip_lambda" {
   type        = "zip"
-  source_dir  = var.lambda_source_dir
   output_path = "processar_pedido.zip"
-}
 
-resource "aws_lambda_function" "processador_de_pedidos" {
-  provider = var.env == "local" ? aws.localstack : aws 
+  # Aponta para o arquivo Python principal
+  source {
+    content  = file("${var.lambda_source_dir}/main.py")
+    filename = "main.py"
+  }
 
-  function_name = "${var.lambda_function_name}-${var.env}"
-  role          = aws_iam_role.role_lambda.arn
-  handler       = var.lambda_handler
-  runtime       = var.lambda_runtime
-  
-  filename         = data.archive_file.zip_lambda.output_path
-  source_code_hash = data.archive_file.zip_lambda.output_base64sha256
-}
-
-resource "aws_lambda_event_source_mapping" "gatilho_sqs" {
-  provider = var.env == "local" ? aws.localstack : aws 
-
-  event_source_arn = aws_sqs_queue.fila_de_pedidos.arn
-  function_name    = aws_lambda_function.processador_de_pedidos.arn
-  batch_size       = 1
+  # Se houver um requirements.txt, ele também será incluído
+  # O 'fileexists' garante que o Terraform não quebre se o arquivo não existir.
+  dynamic "source" {
+    for_each = fileexists("${var.lambda_source_dir}/requirements.txt") ? [1] : []
+    content {
+      content  = file("${var.lambda_source_dir}/requirements.txt")
+      filename = "requirements.txt"
+    }
+  }
 }
 
 # --- 5. Permissões (IAM) ---
