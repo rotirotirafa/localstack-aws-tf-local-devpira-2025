@@ -28,6 +28,8 @@ resource "aws_sqs_queue" "fila_pedidos_falhados" {
 # --- 3. Bucket de Armazenamento (S3) ---
 resource "aws_s3_bucket" "bucket_de_pedidos" {
   bucket = "${var.s3_bucket_name}-${var.env}"
+  # Não subir esta linha em Produção sem pensar bem! Aqui é só para facilitar os testes locais.
+  force_destroy = true
 }
 
 resource "aws_s3_bucket_notification" "notificacao_sqs" {
