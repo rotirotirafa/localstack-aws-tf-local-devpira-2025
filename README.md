@@ -31,7 +31,7 @@ Você só precisa ter **Docker**, **Terraform** e o **AWS CLI** instalados.
 ### 1. Clone o Repositório
 
 ```bash
-git clone [https://github.com/SEU_USUARIO/localstack-aws-tf-local-devpira-2025.git](https://github.com/SEU_USUARIO/localstack-aws-tf-local-devpira-2025.git)
+git clone [https://github.com/rotirotirafa/localstack-aws-tf-local-devpira-2025.git](https://github.com/rotirotirafa/localstack-aws-tf-local-devpira-2025.git)
 cd localstack-aws-tf-local-devpira-2025
 ```
 
