@@ -21,5 +21,18 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"
       # volume para persistir os dados.
       - "localstack_data:/var/lib/localstack"
+  dynamodb-admin:
+    # Interface web para gerenciar o DynamoDB local.
+    image: aaronshaf/dynamodb-admin
+    container_name: gui_dynamo_devpira
+    ports:
+      - "8001:8001"
+    environment:
+      - DYNAMO_ENDPOINT=http://localstack:4566
+      - AWS_REGION=test
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+    depends_on:
+      - localstack
 volumes:
   localstack_data: {}
