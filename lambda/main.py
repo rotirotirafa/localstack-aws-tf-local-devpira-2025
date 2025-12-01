@@ -7,8 +7,7 @@ import urllib.parse
 # 1. Inicializa os clientes fora do handler (boa prática)
 dynamodb = boto3.resource('dynamodb')
 
-# Pega o nome da tabela do DynamoDB da variável de ambiente
-# que o Terraform injetou.
+# Pega o nome da tabela do DynamoDB da variável de ambiente que o Terraform injetou.
 TABLE_NAME = os.environ.get('DYNAMO_TABLE_NAME')
 if not TABLE_NAME:
     raise ValueError("Variável de ambiente 'DYNAMO_TABLE_NAME' não definida.")
