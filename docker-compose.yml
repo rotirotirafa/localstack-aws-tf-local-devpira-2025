@@ -10,6 +10,8 @@ services:
       - AWS_DEFAULT_REGION=us-east-1
       - AWS_ACCESS_KEY_ID=test
       - AWS_SECRET_ACCESS_KEY=test
+      - HOSTNAME_EXTERNAL=127.0.0.1
+      - LOCALSTACK_HOST=127.0.0.1
       # Configuração para o executor do Lambda.
       # Isso diz ao Localstack para rodar o código do Lambda dentro de um container Docker.
       - LAMBDA_EXECUTOR=docker
