@@ -1,6 +1,6 @@
 # Do Zero ao MVP Serverless: AWS com Localstack e Terraform (DEVPIRA 2025)
 
-![Logo DEVPIRA 2025](https://caminho-para-o-logo/logo.png) Repositório com todo o material de apoio, códigos e scripts da minha palestra **"Do Zero ao MVP Serverless: Construindo uma Aplicação AWS sem Gastar um Real"** apresentada no DEVPIRA Festival 2025, em Piracicaba-SP.
+![Logo DEVPIRA 2025](docs/img/Logo.svg) Repositório com todo o material de apoio, códigos e scripts da minha palestra **"Do Zero ao MVP Serverless: Construindo uma Aplicação AWS sem Gastar um Real"** apresentada no DEVPIRA Festival 2025, em Piracicaba-SP.
 
 **Palestrante:** Rafael Rotiroti ([LinkedIn](https://www.linkedin.com/in/rotirotirafa))
 
@@ -52,15 +52,15 @@ Primeiro, instale o `tflocal` (se ainda não tiver):
 pip install terraform-local
 ```
 
-Agora, dentro da pasta `terraform/`, inicialize e aplique:
+Agora, dentro da pasta `scripts/`, inicialize e aplique:
 ```bash
-cd terraform
+cleanup.sh
 
 # Inicializa o Terraform
-tflocal init
+init_demo.sh
 
 # Aplica e cria os recursos (S3, SQS, Lambda, DynamoDB)
-tflocal apply -auto-approve
+test_flow.sh
 ```
 
 **Pronto! Sua arquitetura AWS está no ar, rodando na sua máquina!**
