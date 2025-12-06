@@ -52,15 +52,19 @@ Primeiro, instale o `tflocal` (se ainda não tiver):
 pip install terraform-local
 ```
 
-Agora, dentro da pasta `scripts/`, inicialize e aplique:
+Caso não tenha o `make` :
+
+Dentro da pasta `scripts/`, inicialize e aplique:
 ```bash
-cleanup.sh
 
 # Inicializa o Terraform
 init_demo.sh
 
 # Aplica e cria os recursos (S3, SQS, Lambda, DynamoDB)
 test_flow.sh
+
+#Limpa 
+cleanup.sh
 ```
 
 **Pronto! Sua arquitetura AWS está no ar, rodando na sua máquina!**
